@@ -14,6 +14,7 @@ And here I want to help the BI team to achieve Kafka full control. Two points:
 
    1. Monitor Kafka Brokers service
    2. Monitor Kafka Lag count
+   
 For Kafka monitoring, there are ready-made open source software, and in our company also used for some time, there are two options. Our company uses the third option.
 
 Kafka three monitoring tools
@@ -44,17 +45,30 @@ Uncoment and set **START_POLLERS=10**
 Uncoment and set to **StartJavaPollers=5**
 Change IP for **JavaGateway=IP_address_java_gateway**
 
-### Restart zabbix-server
-    /etc/init.d/zabbix-java-gataway restart
-### Add to autorun zabbix-java-gataway
-     chkconfig --level 345 zabbix-java-gataway on
-### Start zabbix-java-gataway
-    /etc/init.d/zabbix-java-gataway start
-### Kafka configuration
 
+*  Restart zabbix-server
+
+```
+/etc/init.d/zabbix-java-gataway restart
+```
+
+*   Add to autorun zabbix-java-gataway
+   
+```   
+   chkconfig --level 345 zabbix-java-gataway on
+```
+
+*  Start zabbix-java-gataway
+
+```
+/etc/init.d/zabbix-java-gataway start
+```
+*  Kafka configuration
+
+```
     cd /opt/kafka/bin
     mcedit kafka-run-class.sh
-
+```
 change from
 
     # JMX settings
@@ -68,9 +82,9 @@ to
     if [ -z "$KAFKA_JMX_OPTS" ]; then
     KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=12345 -    Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false "
     fi
-## Add Kafka as service
 
-Add to /etc/supervisord.conf that lines
+* Add Kafka as service
+* Add to /etc/supervisord.conf that lines
 
      [program:kafka]
      command=/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
@@ -85,8 +99,12 @@ Add to /etc/supervisord.conf that lines
      logfile=/var/log/kafka/supervisord-kafka.out
      logfile_maxbytes=20MB
      logfile_backups=10
-## Restart supervisor 
-     /etc/init.d/supervisord restart
+
+* Restart supervisor 
+ 
+ ```
+ /etc/init.d/supervisord restart
+ ```
 # Zabbix configuration
 
 #Upload scripts for discovery JMX

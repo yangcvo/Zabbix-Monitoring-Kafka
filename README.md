@@ -1,7 +1,33 @@
 # Zabbix-Monitoring-Kafka
 Zabbix-Monitoring Kafka集群 Brokers服务,Kafka Consumer Monitoring
 
+
+#### Preface:
+
+The company let me deal with Hadoop and related services monitoring, alarm here mainly kafka cluster services. Here I also read a few kafka related articles, good text posted out:
+
+Infoq kafka entry understanding
+Introduction to kafka working principle
+Several of our main features in Kafka are very satisfying to our needs: scalability, data partitioning, low latency, and the ability to handle a large number of different consumers.
+
+And here I want to help the BI team to achieve Kafka full control. Two points:
+
+   1. Monitor Kafka Brokers service
+   2. Monitor Kafka Lag count
+For Kafka monitoring, there are ready-made open source software, and in our company also used for some time, there are two options. Our company uses the third option.
+
+Kafka three monitoring tools
+table of Contents
+
+```
+  1, Kafka Web Conslole
+  2, Kafka Manager
+  3, KafkaOffsetMonitor
+```
+
+
 ### First you have to install zabbix-java-gataway
+ 
     yum install -y zabbix-java-gataway
 ### Configuring zabbix-java-gataway
     mcedit /etc/zabbix/zabbix_java_gateway.conf

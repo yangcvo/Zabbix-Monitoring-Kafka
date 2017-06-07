@@ -148,3 +148,15 @@ if you have problems you can check JMX using this script
 For monitoring kafka consumers you should install [Burrow](https://github.com/linkedin/Burrow/) daemon and [jq](https://stedolan.github.io/jq/download/) tools on kafka host
 
 ***
+
+### kafka-monitoring
+
+http://adminotes.com/
+
+https://github.com/helli0n/kafka-monitoring/wiki/Kafka-monitoring
+
+https://engineering.linkedin.com/apache-kafka/burrow-kafka-consumer-monitoring-reinvented
+
+https://github.com/linkedin/Burrow/wiki
+
+https://community.hortonworks.com/articles/28103/monitoring-kafka-with-burrow.html

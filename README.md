@@ -93,7 +93,7 @@ Log in to your zabbix web
 
 **Click Configuration->Templates->Import**
 
-Download template [zbx_kafka_templates.xml](https://github.com/helli0n/kafka-monitoring/blob/master/zbx_kafka_templates.xml) and upload to zabbix
+Download template [zbx_kafka_templates.xml](https://github.com/yangcvo/Zabbix-Monitoring-Kafka/blob/master/zbx_export_templates.xml) and upload to zabbix
 Then add this template to Kafka and configure JMX interfaces on zabbix 
 
 Enter Kafka IP address and JMX port

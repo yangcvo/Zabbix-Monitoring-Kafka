@@ -29,33 +29,37 @@ table of Contents
 
 * First you have to install zabbix-java-gataway
  
- ```bash
+```
     yum install -y zabbix-java-gataway
-  ```
+```
   
-*  Configuring zabbix-java-gataway
+* Configuring zabbix-java-gataway
+
+```
     mcedit /etc/zabbix/zabbix_java_gateway.conf
+```
 Uncoment and set **START_POLLERS=10**
 
 *  Configuring zabbix-server
   
-   ```bash
+```bash
   mcedit /etc/zabbix/zabbix_server.conf
-  ```
+```
 Uncoment and set to **StartJavaPollers=5**
 Change IP for **JavaGateway=IP_address_java_gateway**
 
 
-*  Restart zabbix-server
+* Restart zabbix-server
 
-```
+```bash
 /etc/init.d/zabbix-java-gataway restart
 ```
 
-*   Add to autorun zabbix-java-gataway
+* Add to autorun zabbix-java-gataway
    
-```   
-   chkconfig --level 345 zabbix-java-gataway on
+
+```bash  
+ chkconfig --level 345 zabbix-java-gataway on
 ```
 
 *  Start zabbix-java-gataway

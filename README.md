@@ -26,16 +26,24 @@ table of Contents
 ```
 
 
-### First you have to install zabbix-java-gataway
+* First you have to install zabbix-java-gataway
  
+ ```bash
     yum install -y zabbix-java-gataway
-### Configuring zabbix-java-gataway
+  ```
+  
+*  Configuring zabbix-java-gataway
     mcedit /etc/zabbix/zabbix_java_gateway.conf
 Uncoment and set **START_POLLERS=10**
-### Configuring zabbix-server
-    mcedit /etc/zabbix/zabbix_server.conf
+
+*  Configuring zabbix-server
+  
+   ```bash
+  mcedit /etc/zabbix/zabbix_server.conf
+  ```
 Uncoment and set to **StartJavaPollers=5**
 Change IP for **JavaGateway=IP_address_java_gateway**
+
 ### Restart zabbix-server
     /etc/init.d/zabbix-java-gataway restart
 ### Add to autorun zabbix-java-gataway
@@ -83,8 +91,8 @@ Add to /etc/supervisord.conf that lines
 
 #Upload scripts for discovery JMX
 
-     git clone https://github.com/helli0n/kafka-monitoring.git 
-     cd zabbix/kafka
+     git clone https://github.com/yangcvo/Zabbix-Monitoring-Kafka.git
+     cd /kafka
      cp jmx_discovery /etc/zabbix/externalscripts
      cp JMXDiscovery-0.0.1.jar /etc/zabbix/externalscripts
 

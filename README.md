@@ -14,6 +14,7 @@ And here I want to help the BI team to achieve Kafka full control. Two points:
 
    1. Monitor Kafka Brokers service
    2. Monitor Kafka Lag count
+   
 For Kafka monitoring, there are ready-made open source software, and in our company also used for some time, there are two options. Our company uses the third option.
 
 Kafka three monitoring tools
@@ -26,27 +27,48 @@ table of Contents
 ```
 
 
-### First you have to install zabbix-java-gataway
+* First you have to install zabbix-java-gataway
  
+ ```bash
     yum install -y zabbix-java-gataway
-### Configuring zabbix-java-gataway
+  ```
+  
+*  Configuring zabbix-java-gataway
     mcedit /etc/zabbix/zabbix_java_gateway.conf
 Uncoment and set **START_POLLERS=10**
-### Configuring zabbix-server
-    mcedit /etc/zabbix/zabbix_server.conf
+
+*  Configuring zabbix-server
+  
+   ```bash
+  mcedit /etc/zabbix/zabbix_server.conf
+  ```
 Uncoment and set to **StartJavaPollers=5**
 Change IP for **JavaGateway=IP_address_java_gateway**
-### Restart zabbix-server
-    /etc/init.d/zabbix-java-gataway restart
-### Add to autorun zabbix-java-gataway
-     chkconfig --level 345 zabbix-java-gataway on
-### Start zabbix-java-gataway
-    /etc/init.d/zabbix-java-gataway start
-### Kafka configuration
 
+
+*  Restart zabbix-server
+
+```
+/etc/init.d/zabbix-java-gataway restart
+```
+
+*   Add to autorun zabbix-java-gataway
+   
+```   
+   chkconfig --level 345 zabbix-java-gataway on
+```
+
+*  Start zabbix-java-gataway
+
+```
+/etc/init.d/zabbix-java-gataway start
+```
+*  Kafka configuration
+
+```
     cd /opt/kafka/bin
     mcedit kafka-run-class.sh
-
+```
 change from
 
     # JMX settings
@@ -60,9 +82,9 @@ to
     if [ -z "$KAFKA_JMX_OPTS" ]; then
     KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=12345 -    Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false "
     fi
-## Add Kafka as service
 
-Add to /etc/supervisord.conf that lines
+* Add Kafka as service
+* Add to /etc/supervisord.conf that lines
 
      [program:kafka]
      command=/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
@@ -77,14 +99,18 @@ Add to /etc/supervisord.conf that lines
      logfile=/var/log/kafka/supervisord-kafka.out
      logfile_maxbytes=20MB
      logfile_backups=10
-## Restart supervisor 
-     /etc/init.d/supervisord restart
+
+* Restart supervisor 
+ 
+ ```
+ /etc/init.d/supervisord restart
+ ```
 # Zabbix configuration
 
 #Upload scripts for discovery JMX
 
-     git clone https://github.com/helli0n/kafka-monitoring.git 
-     cd zabbix/kafka
+     git clone https://github.com/yangcvo/Zabbix-Monitoring-Kafka.git
+     cd /kafka
      cp jmx_discovery /etc/zabbix/externalscripts
      cp JMXDiscovery-0.0.1.jar /etc/zabbix/externalscripts
 
@@ -93,7 +119,7 @@ Log in to your zabbix web
 
 **Click Configuration->Templates->Import**
 
-Download template [zbx_kafka_templates.xml](https://github.com/helli0n/kafka-monitoring/blob/master/zbx_kafka_templates.xml) and upload to zabbix
+Download template [zbx_kafka_templates.xml](https://github.com/yangcvo/Zabbix-Monitoring-Kafka/blob/master/zbx_export_templates.xml) and upload to zabbix
 Then add this template to Kafka and configure JMX interfaces on zabbix 
 
 Enter Kafka IP address and JMX port
